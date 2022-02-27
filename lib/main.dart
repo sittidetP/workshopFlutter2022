@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:testks2022/screens/login_screen.dart';
 
 void main() {
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        fontFamily: GoogleFonts.kanit().fontFamily,
+        scaffoldBackgroundColor: Colors.lightBlue[900],
       ),
       home: LoginScreen(),
     );
