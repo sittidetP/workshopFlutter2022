@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testks2022/constant.dart';
+import 'package:testks2022/models/user_model.dart';
+import 'package:testks2022/services/login_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -10,6 +12,25 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool showPassword = true;
+  String email = "";
+  String password = "";
+  late UserModel user;
+
+  Future<UserModel> login(String email, String password) async {
+    user = await LoginService(email, password);
+    if(user.email.isEmpty){
+
+    }else{
+      showDialog(context: context 
+      , builder: (BuildContext context){
+        return AlertDialog(
+          title: Text("ไม่สามารถเข้าสู้ระบบได้"),
+          content: Text("กรุณาตรวจสอบข้อมูล"),
+        );
+      });
+    }
+    return user;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +61,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderRadius: BorderRadius.circular(30),
               ),
               child: TextFormField(
+                onChanged: (value){
+                  setState(() {
+                    email = value;
+                  });
+                },
                 cursorColor: primaryColor,
                 decoration: InputDecoration(
                   icon: Icon(
@@ -60,6 +86,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderRadius: BorderRadius.circular(30),
               ),
               child: TextFormField(
+                onChanged: (value){ 
+                  password = value;
+                },
                 cursorColor: primaryColor,
                 obscureText: showPassword,
                 decoration: InputDecoration(
@@ -71,7 +100,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       setState(() {
                         showPassword = !showPassword;
-                        print(showPassword);
                       });
                     },
                     icon: Icon(
@@ -90,7 +118,9 @@ class _LoginScreenState extends State<LoginScreen> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    login(email, password);
+                  },
                   child: Text("LOGIN", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
                   style: ElevatedButton.styleFrom(
                     primary: primaryColor,
