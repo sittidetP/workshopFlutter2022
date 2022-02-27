@@ -9,7 +9,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-bool showPassword = true;
+  bool showPassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -74,13 +74,28 @@ bool showPassword = true;
                         print(showPassword);
                       });
                     },
-                    icon: Icon( showPassword ?
-                      Icons.visibility : Icons.visibility_off,
+                    icon: Icon(
+                      showPassword ? Icons.visibility : Icons.visibility_off,
                       color: primaryColor,
                     ),
                   ),
                   hintText: "Password",
                   border: InputBorder.none,
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              width: size.width * 0.8,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text("LOGIN", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+                  style: ElevatedButton.styleFrom(
+                    primary: primaryColor,
+                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20)
+                  ),
                 ),
               ),
             )
