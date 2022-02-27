@@ -38,6 +38,7 @@ dependencies:
   http: ^0.13.4
   crypto: ^3.0.1
   flutter_spinkit: ^5.1.0
+  webview_flutter: ^3.0.1
 
 dev_dependencies:
   flutter_test:
