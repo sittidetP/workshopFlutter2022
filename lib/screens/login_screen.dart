@@ -18,16 +18,31 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<UserModel> login(String email, String password) async {
     user = await LoginService(email, password);
-    if(user.email.isEmpty){
-
-    }else{
-      showDialog(context: context 
-      , builder: (BuildContext context){
-        return AlertDialog(
-          title: Text("ไม่สามารถเข้าสู้ระบบได้"),
-          content: Text("กรุณาตรวจสอบข้อมูล"),
-        );
-      });
+    if (user.email.isEmpty) {
+      print(email + ", pass : " + password + " ==> pass!");
+    } else {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              backgroundColor: Colors.grey.shade300,
+              title: Text("ไม่สามารถเข้าสู้ระบบได้"),
+              content: Text("กรุณาตรวจสอบข้อมูล"),
+              actions: <Widget>[
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      'ตกลง',
+                      style: TextStyle(color: lightColor),
+                    )),
+              ],
+            );
+          });
     }
     return user;
   }
@@ -61,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderRadius: BorderRadius.circular(30),
               ),
               child: TextFormField(
-                onChanged: (value){
+                onChanged: (value) {
                   setState(() {
                     email = value;
                   });
@@ -86,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderRadius: BorderRadius.circular(30),
               ),
               child: TextFormField(
-                onChanged: (value){ 
+                onChanged: (value) {
                   password = value;
                 },
                 cursorColor: primaryColor,
@@ -121,11 +136,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     login(email, password);
                   },
-                  child: Text("LOGIN", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-                  style: ElevatedButton.styleFrom(
-                    primary: primaryColor,
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20)
+                  child: Text(
+                    "LOGIN",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                   ),
+                  style: ElevatedButton.styleFrom(
+                      primary: primaryColor,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 40, vertical: 20)),
                 ),
               ),
             )
