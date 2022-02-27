@@ -70,7 +70,8 @@ bool showPassword = true;
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
-                        showPassword != showPassword;
+                        showPassword = !showPassword;
+                        print(showPassword);
                       });
                     },
                     icon: Icon( showPassword ?
@@ -78,7 +79,6 @@ bool showPassword = true;
                       color: primaryColor,
                     ),
                   ),
-                  // Icon(Icons.visibility, color: primaryColor,),
                   hintText: "Password",
                   border: InputBorder.none,
                 ),
